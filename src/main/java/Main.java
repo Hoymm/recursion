@@ -1,30 +1,19 @@
+
 public class Main {
     public static void main(String[] args) {
-        strDist("hiHellohihihi", "ll");
+        groupSum(0, new int []{2, 4, 8}, 9);
+        System.out.println(counter);
     }
 
-    public static int strDist(String str, String sub) {
-        int strLen = str.length();
-        int subLen = sub.length();
-
-        System.out.println(str);
-        if (strLen <= subLen){
-            return str.equals(sub) ? strLen : 0;
+    static int counter = 0;
+    public static boolean groupSum(int start, int[] nums, int target) {
+        counter++;
+        System.out.println("");
+        if (start == nums.length){
+            return target == 0;
         }
 
-        if (str.substring(0, subLen).equals(sub) && str.substring(strLen-subLen).equals(sub)){
-            return str.length();
-        }
-
-        if (str.substring(0, subLen).equals(sub)){
-            return strDist(str.substring(strLen-1), sub);
-        }
-
-        if (str.substring(strLen-subLen).equals(sub)){
-            return strDist(str.substring(1), sub);
-        }
-
-        return strDist(str.substring(1, strLen-1), sub);
+        return groupSum(start+1, nums, target-nums[start]) || groupSum(start+1, nums, target);
     }
 
 

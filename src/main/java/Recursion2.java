@@ -8,6 +8,7 @@ public class Recursion2 {
 
         return groupSum(start+1, nums, target-nums[start]) || groupSum(start+1, nums, target);
     }
+
     public static boolean groupSum6(int start, int[] nums, int target) {
         if (start == nums.length){
             return target == 0;
@@ -79,5 +80,47 @@ public class Recursion2 {
                     || splitHelper(curIndex+1, nums, group1, group2+nums[curIndex]);
         }
     }
+
+    public static boolean splitOdd10(int[] nums) {
+        return splitArrayHelper(0, nums, 0, 0);
+    }
+
+    public static boolean splitArrayHelper(int curIndex, int nums[], int groupOne, int groupTwo){
+        if (curIndex == nums.length){
+            return isFirstMultipleOf10AndOtherOdd(groupOne, groupTwo)
+                    || isFirstMultipleOf10AndOtherOdd(groupOne, groupTwo);
+        }
+        else{
+            return splitArrayHelper(curIndex+1, nums, groupOne+nums[curIndex], groupTwo)
+                    || splitArrayHelper(curIndex+1, nums, groupOne, groupTwo+nums[curIndex]);
+        }
+    }
+
+    public static boolean isFirstMultipleOf10AndOtherOdd(int first, int second){
+        return first%10 == 0 && second%2 == 1;
+    }
+
+
+    public static boolean split53(int[] nums) {
+        return split53Helper(0, nums, 0, 0);
+    }
+
+    public static boolean split53Helper(int curIndex, int nums[], int groupOne, int groupTwo){
+        if (curIndex == nums.length){
+            return groupOne == groupTwo;
+        }
+        else{
+            if (nums[curIndex]%5 == 0){
+                return split53Helper(curIndex+1, nums, groupOne+nums[curIndex], groupTwo);
+            }
+            else if (nums[curIndex]%3 == 0){
+                return split53Helper(curIndex+1, nums, groupOne, groupTwo+nums[curIndex]);
+            }
+
+            return split53Helper(curIndex+1, nums, groupOne+nums[curIndex], groupTwo)
+                    || split53Helper(curIndex+1, nums, groupOne, groupTwo+nums[curIndex]);
+        }
+    }
+
 
 }

@@ -1,19 +1,29 @@
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        groupSum(0, new int []{2, 4, 8}, 9);
-        System.out.println(counter);
+        splitArray(new int [] {5, 2, 3});
     }
 
-    static int counter = 0;
-    public static boolean groupSum(int start, int[] nums, int target) {
-        counter++;
-        System.out.println("");
-        if (start == nums.length){
-            return target == 0;
+    public boolean splitArray(int[] nums) {
+        if (nums.length == 0){
+            return true;
         }
+        else if (nums.length == 1){
+            return false;
+        }
+        else if (nums.length == 2){
+            return nums[0] == nums[1];
+        }
+        else{
+            int [] subarrayFirstAdded = Arrays.copyOfRange(nums, 1, nums.length);
+            subarrayFirstAdded[0] += nums[0];
 
-        return groupSum(start+1, nums, target-nums[start]) || groupSum(start+1, nums, target);
+            int [] subarrayLastAdded = Arrays.copyOfRange(nums, 0, nums.length-1);
+            subarrayLastAdded[subarrayLastAdded.length-1] += nums[nums.length-1];
+
+            return splitArray(subarrayFirstAdded) || splitArray(subarrayLastAdded);
+        }
     }
 
 
